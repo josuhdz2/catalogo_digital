@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,7 +45,8 @@ class _HomePageState extends State<HomePage> {
           Text("nombres del equipo"),
           Text("Diegod ya sabe usar git")
           Text("Josue Hernandez Chavez"),
-          Text("Alexandra Monserrath Gudiño Lucas")
+          Text("Alexandra Monserrath Gudiño Lucas"),
+          Text("Hernandez Sanchez Jeronimo de Jesus")
         ],
       )
     );
