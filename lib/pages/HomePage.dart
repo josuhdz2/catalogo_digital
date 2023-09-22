@@ -35,12 +35,17 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(color: Colors.yellow),
           ),
         ),
-        body: const Column(
-          children: [
-            Text("nombres del equipo"),
-            Text("Josue Hernandez Chavez"),
-            Text("Alexandra Monserrath Gudiño Lucas")
-          ],
-        ));
+      ),
+      body: const Column
+      (
+        children:
+        [
+          Text("nombres del equipo"),
+          Text("Diegod ya sabe usar git")
+          Text("Josue Hernandez Chavez"),
+          Text("Alexandra Monserrath Gudiño Lucas")
+        ],
+      )
+    );
   }
 }
