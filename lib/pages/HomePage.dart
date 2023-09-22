@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage>
         [
           Text("nombres del equipo"),
           Text("Diegod ya sabe usar git")
+          Text("Josue Hernandez Chavez")
         ],
       )
     );
