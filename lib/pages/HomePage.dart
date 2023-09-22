@@ -27,14 +27,20 @@ class _HomePageState extends State<HomePage> {
     }
   }*/
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          centerTitle: true,
-          title: const Text(
-            "Pastylla Store",
-            style: TextStyle(color: Colors.yellow),
+  Widget build(BuildContext context)
+  {
+    return Scaffold
+    (
+      appBar: AppBar
+      (
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: const Text
+        (
+          "Pastylla Store",
+          style: TextStyle
+          (
+            color: Colors.yellow
           ),
         ),
       ),
@@ -43,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         children:
         [
           Text("nombres del equipo"),
-          Text("Diegod ya sabe usar git")
+          Text("Diegod ya sabe usar git"),
           Text("Josue Hernandez Chavez"),
           Text("Alexandra Monserrath Gudiño Lucas"),
           Text("Hernandez Sanchez Jeronimo de Jesus")
