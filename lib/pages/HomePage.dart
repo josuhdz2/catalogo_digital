@@ -46,7 +46,8 @@ class _HomePageState extends State<HomePage>
       (
         children:
         [
-          Text("nombres del equipo")
+          Text("nombres del equipo"),
+          Text("Josue Hernandez Chavez")
         ],
       )
     );
