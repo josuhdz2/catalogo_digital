@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-class HomePage extends StatefulWidget
-{
-  const HomePage({ Key? key }) : super(key: key);
+
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
   @override
   State<HomePage> createState() => _HomePageState();
 }
-class _HomePageState extends State<HomePage>
-{
+
+class _HomePageState extends State<HomePage> {
   /*@override
   void initState()
   {
@@ -25,20 +25,14 @@ class _HomePageState extends State<HomePage>
     }
   }*/
   @override
-  Widget build(BuildContext context)
-  {
-    return Scaffold
-    (
-      appBar: AppBar
-      (
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: const Text
-        (
-          "Pastylla Store",
-          style: TextStyle
-          (
-            color: Colors.yellow
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          centerTitle: true,
+          title: const Text(
+            "Pastylla Store",
+            style: TextStyle(color: Colors.yellow),
           ),
         ),
       ),
@@ -48,7 +42,8 @@ class _HomePageState extends State<HomePage>
         [
           Text("nombres del equipo"),
           Text("Diegod ya sabe usar git")
-          Text("Josue Hernandez Chavez")
+          Text("Josue Hernandez Chavez"),
+          Text("Alexandra Monserrath Gudiño Lucas")
         ],
       )
     );
