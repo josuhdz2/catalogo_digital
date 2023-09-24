@@ -27,32 +27,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context)
   {
-    return Scaffold
+    return const Column
     (
-      appBar: AppBar
-      (
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: const Text
+      children:
+      [
+        Text
         (
-          "Pastylla Store",
+          "nombres del equipo",
           style: TextStyle
           (
-            color: Colors.yellow
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+            fontSize: 20
           ),
         ),
-      ),
-      body: const Column
-      (
-        children:
-        [
-          Text("nombres del equipo"),
-          Text("Diegod ya sabe usar git"),
-          Text("Josue Hernandez Chavez"),
-          Text("Alexandra Monserrath Gudiño Lucas"),
-          Text("Hernandez Sanchez Jeronimo de Jesus")
-        ],
-      )
+        Text("Diegod ya sabe usar git"),
+        Text("Josue Hernandez Chavez"),
+        Text("Alexandra Monserrath Gudiño Lucas"),
+        Text("Hernandez Sanchez Jeronimo de Jesus")
+      ],
     );
   }
 }
