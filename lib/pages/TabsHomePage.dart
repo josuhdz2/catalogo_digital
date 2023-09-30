@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pastylla_client/pages/CategoryPage.dart';
 import 'package:pastylla_client/pages/HomePage.dart';
+import 'package:pastylla_client/pages/InitalPage.dart';
 
 class TabsHomePage extends StatelessWidget {
   const TabsHomePage({super.key});
@@ -20,6 +21,7 @@ class TabsHomePage extends StatelessWidget {
             tabs:
             [
               Tab(icon: Icon(Icons.home)),
+              Tab(icon:Icon(Icons.menu)),
               Tab(icon: Icon(Icons.info))
             ]
           ),
@@ -38,6 +40,7 @@ class TabsHomePage extends StatelessWidget {
         (
           children:
           [
+            InitialPage(),
             CategoryPage(),
             HomePage()
           ],
