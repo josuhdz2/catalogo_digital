@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pastylla_client/services/Service.dart';
-class LoginPage extends StatefulWidget
+import 'package:url_launcher/url_launcher.dart';
+class RegistrationPage extends StatefulWidget
 {
-  const LoginPage({ Key? key }) : super(key: key);
+  const RegistrationPage({ Key? key }) : super(key: key);
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegistrationPage> createState() => _RegistrationPageState();
 }
-class _LoginPageState extends State<LoginPage>
+class _RegistrationPageState extends State<RegistrationPage>
 {
   Service service=Service();
-  void nextPage()
-  {
-    Navigator.pushNamed(context, '/tabs');
-  }
   final TextEditingController emailController=TextEditingController();
   final TextEditingController passwordController=TextEditingController();
   @override
@@ -21,7 +18,7 @@ class _LoginPageState extends State<LoginPage>
     return Scaffold
     (
       backgroundColor: Colors.black,
-      body: Center
+      body:Center
       (
         child: Stack
         (
@@ -30,14 +27,14 @@ class _LoginPageState extends State<LoginPage>
           [
             const SizedBox
             (
-              height: 500,
+              height: 600,
               width: 300,
-              child: DecoratedBox
+              child:DecoratedBox
               (
                 decoration: BoxDecoration
                 (
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15))
+                  borderRadius: BorderRadius.all(Radius.circular(15)) 
                 )
               ),
             ),
@@ -54,14 +51,14 @@ class _LoginPageState extends State<LoginPage>
                   (
                     color: Color.fromRGBO(255, 194, 1, 1),
                     fontSize: 35,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold
                   ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
                 const Text
                 (
-                  "Iniciar sesion",
+                  "Registrarse",
                   style: TextStyle
                   (
                     fontSize: 30,
@@ -74,7 +71,25 @@ class _LoginPageState extends State<LoginPage>
                   width: 250,
                   child: TextFormField
                   (
-                    controller: emailController,
+                    decoration: const InputDecoration
+                    (
+                      hintText: "Nombre de usuario",
+                      focusedBorder: OutlineInputBorder
+                      (
+                        borderSide: BorderSide
+                        (
+                          color: Colors.black
+                        )
+                      )
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                SizedBox
+                (
+                  width: 250,
+                  child: TextFormField
+                  (
                     decoration: const InputDecoration
                     (
                       hintText: "Email",
@@ -94,7 +109,6 @@ class _LoginPageState extends State<LoginPage>
                   width: 250,
                   child: TextFormField
                   (
-                    controller: passwordController,
                     obscureText: true,
                     decoration: const InputDecoration
                     (
@@ -110,43 +124,47 @@ class _LoginPageState extends State<LoginPage>
                   ),
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton
+                const Text
                 (
-                  onPressed: () async
+                  "Al finalizar el registro se\nesta aceptado la",
+                  textAlign: TextAlign.center,
+                ),
+                GestureDetector
+                (
+                  onTap: ()async
                   {
-                    String email=emailController.text;
-                    String password=passwordController.text;
-                    if(await service.login(email, password))
+                    Uri url=Uri.parse("https://shrub-almond-f38.notion.site/Pol-tica-de-privacidad-9867af0633af450b8cb8d4104d483fe5?pvs=4");
+                    if(await canLaunchUrl(url))
                     {
-                      nextPage();
+                      await launchUrl(url);
+                    }
+                    else
+                    {
+                      throw 'No se pudo abrir la URL $url';
                     }
                   },
+                  child: const Text
+                  (
+                    "Politica de Privacidad",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton
+                (
+                  onPressed: (){},
                   style:ElevatedButton.styleFrom
                   (
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white
                   ),
-                  child: const Text("Iniciar")
-                ),
-                const SizedBox(height: 20),
-                const Text("No tienes una cuenta?"),
-                GestureDetector
-                (
-                  onTap: ()
-                  {
-                    Navigator.pushNamed(context, '/signup');
-                  },
-                  child: const Text
-                  (
-                    "Crear una cuenta",
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                  child: const Text("Registrarse")
                 )
               ],
             )
           ],
         ),
-      ),
+      )
     );
   }
 }

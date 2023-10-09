@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pastylla_client/services/Service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -6,7 +7,9 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+{
+  Service service=Service();
   /*@override
   void initState()
   {
@@ -27,11 +30,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context)
   {
-    return const Column
+    return Column
     (
+      mainAxisAlignment: MainAxisAlignment.center,
       children:
       [
-        Text
+        const Text
         (
           "nombres del equipo",
           style: TextStyle
@@ -41,10 +45,21 @@ class _HomePageState extends State<HomePage> {
             fontSize: 20
           ),
         ),
-        Text("Diegod ya sabe usar git"),
-        Text("Josue Hernandez Chavez"),
-        Text("Alexandra Monserrath Gudiño Lucas"),
-        Text("Hernandez Sanchez Jeronimo de Jesus")
+        const Text("Diegod ya sabe usar git"),
+        const Text("Josue Hernandez Chavez"),
+        const Text("Alexandra Monserrath Gudiño Lucas"),
+        const Text("Hernandez Sanchez Jeronimo de Jesus"),
+        ElevatedButton
+        (
+          onPressed: () async
+          {
+            await service.logout();
+            setState(() {
+              Navigator.pushReplacementNamed(context, '/login');
+            });
+          },
+          child: const Text("cerrar sesion")
+        )
       ],
     );
   }
