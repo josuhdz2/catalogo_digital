@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pastylla_client/services/Service.dart';
 class LoginPage extends StatefulWidget
 {
@@ -11,7 +12,7 @@ class _LoginPageState extends State<LoginPage>
   Service service=Service();
   void nextPage()
   {
-    Navigator.pushNamed(context, '/tabs');
+    Navigator.pushReplacementNamed(context, '/tabs');
   }
   final TextEditingController emailController=TextEditingController();
   final TextEditingController passwordController=TextEditingController();
@@ -119,6 +120,15 @@ class _LoginPageState extends State<LoginPage>
                     if(await service.login(email, password))
                     {
                       nextPage();
+                    }
+                    else
+                    {
+                      Fluttertoast.showToast
+                      (
+                        msg: "La informacion es incorrecta",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM
+                      );
                     }
                   },
                   style:ElevatedButton.styleFrom

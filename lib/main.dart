@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pastylla_client/pages/LoginPage.dart';
 import 'package:pastylla_client/pages/RegistrationPage.dart';
 import 'package:pastylla_client/pages/TabsHomePage.dart';
-import 'package:pastylla_client/pages/TenisPage.dart';
 import 'package:pastylla_client/services/Service.dart';
 void main()
 {
@@ -15,7 +14,6 @@ void main()
     debugShowCheckedModeBanner: false,
     routes: {
       '/tabs':(context)=>const TabsHomePage(),
-      '/tenis':(context)=>const TenisPage(),
       '/login':(context)=>const LoginPage(),
       '/signup':(context)=>const RegistrationPage()
     },

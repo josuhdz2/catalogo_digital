@@ -38,6 +38,8 @@ dependencies:
   url_launcher: ^6.1.14
   http: ^1.1.0
   shared_preferences: ^2.2.1
+  fluttertoast: ^8.2.2
+  card_swiper : ^3.0.0
 
 dev_dependencies:
   flutter_test:
