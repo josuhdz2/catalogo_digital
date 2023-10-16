@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:pastylla_client/services/Service.dart';
 import 'package:pastylla_client/widgets/Banner.dart';
 import 'package:pastylla_client/widgets/MyAppBar.dart';
-class SearchPage extends StatefulWidget
+class CategoryResultPage extends StatefulWidget
 {
-  final String busqueda;
-  const SearchPage({ Key? key, required this.busqueda }) : super(key: key);
+  final String categoria;
+  const CategoryResultPage({ Key? key, required this.categoria }) : super(key: key);
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<CategoryResultPage> createState() => _CategoryResultPageState();
 }
-class _SearchPageState extends State<SearchPage>
+class _CategoryResultPageState extends State<CategoryResultPage>
 {
-  List<Map<String,dynamic>> lista=[];
+  List<Map<String, dynamic>> lista=[];
   Service service=Service();
   @override
   void initState()
@@ -21,7 +21,7 @@ class _SearchPageState extends State<SearchPage>
   }
   Future<void> peticion()async
   {
-    service.busqueda(widget.busqueda).then((data)
+    service.categoria(widget.categoria).then((data)
     {
       setState(()
       {
@@ -35,19 +35,18 @@ class _SearchPageState extends State<SearchPage>
   {
     return Scaffold
     (
-      appBar: const MyAppBar(nombre: "Resultado de busqueda"),
-      body: GridView.builder
+      appBar: MyAppBar(nombre: widget.categoria),
+      body:GridView.builder
       (
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemCount: lista.length,
         itemBuilder: (context, index)
         {
-          print(lista[index]);
           return BannerBuilder
           (
-            urlImage: lista[index]['imagenes'][0],
             nombre: lista[index]['nombre'],
-            id: lista[index]['_id']
+            id: lista[index]['_id'],
+            urlImage: lista[index]['imagenes'][0]
           );
         }
       ),

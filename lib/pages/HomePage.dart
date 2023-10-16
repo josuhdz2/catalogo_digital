@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pastylla_client/services/Service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -59,7 +60,27 @@ class _HomePageState extends State<HomePage>
             });
           },
           child: const Text("cerrar sesion")
-        )
+        ),
+        GestureDetector
+                (
+                  onTap: ()async
+                  {
+                    Uri url=Uri.parse("https://shrub-almond-f38.notion.site/Pol-tica-de-privacidad-9867af0633af450b8cb8d4104d483fe5?pvs=4");
+                    if(await canLaunchUrl(url))
+                    {
+                      await launchUrl(url);
+                    }
+                    else
+                    {
+                      throw 'No se pudo abrir la URL $url';
+                    }
+                  },
+                  child: const Text
+                  (
+                    "Politica de Privacidad",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
       ],
     );
   }
