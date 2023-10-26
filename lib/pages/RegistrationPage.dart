@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:pastylla_client/services/Service.dart';
 import 'package:url_launcher/url_launcher.dart';
 class RegistrationPage extends StatefulWidget
@@ -12,6 +15,11 @@ class _RegistrationPageState extends State<RegistrationPage>
   Service service=Service();
   final TextEditingController emailController=TextEditingController();
   final TextEditingController passwordController=TextEditingController();
+  final TextEditingController userController=TextEditingController();
+  final emailKey=GlobalKey<FormBuilderFieldState>();
+  final passKey=GlobalKey<FormBuilderFieldState>();
+  final userKey=GlobalKey<FormBuilderFieldState>();
+  bool proceso=false;
   @override
   Widget build(BuildContext context)
   {
@@ -20,145 +28,209 @@ class _RegistrationPageState extends State<RegistrationPage>
       backgroundColor: Colors.black,
       body:Center
       (
-        child: Stack
-        (
-          alignment: Alignment.center,
-          children:
+        child: ListView(
+          children: 
           [
-            const SizedBox
+            Stack
             (
-              height: 600,
-              width: 300,
-              child:DecoratedBox
-              (
-                decoration: BoxDecoration
-                (
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(15)) 
-                )
-              ),
-            ),
-            Column
-            (
-              mainAxisAlignment: MainAxisAlignment.center,
+              alignment: Alignment.center,
               children:
               [
-                const FlutterLogo(size: 60),
-                const Text
+                const SizedBox
                 (
-                  "Pastylla Store\nApp",
-                  style: TextStyle
+                  height: 600,
+                  width: 300,
+                  child:DecoratedBox
                   (
-                    color: Color.fromRGBO(255, 194, 1, 1),
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                const Text
-                (
-                  "Registrarse",
-                  style: TextStyle
-                  (
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                const SizedBox(height: 10),
-                SizedBox
-                (
-                  width: 250,
-                  child: TextFormField
-                  (
-                    decoration: const InputDecoration
+                    decoration: BoxDecoration
                     (
-                      hintText: "Nombre de usuario",
-                      focusedBorder: OutlineInputBorder
-                      (
-                        borderSide: BorderSide
-                        (
-                          color: Colors.black
-                        )
-                      )
-                    ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(15)) 
+                    )
                   ),
                 ),
-                const SizedBox(height: 10),
-                SizedBox
+                Column
                 (
-                  width: 250,
-                  child: TextFormField
-                  (
-                    decoration: const InputDecoration
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:
+                  [
+                    Image.asset("assets/logo.jpg", height: 120),
+                    const Text
                     (
-                      hintText: "Email",
-                      focusedBorder: OutlineInputBorder
+                      "Pastylla Store\nApp",
+                      style: TextStyle
                       (
-                        borderSide: BorderSide
-                        (
-                          color: Colors.black
-                        )
-                      )
+                        color: Color.fromRGBO(255, 194, 1, 1),
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                SizedBox
-                (
-                  width: 250,
-                  child: TextFormField
-                  (
-                    obscureText: true,
-                    decoration: const InputDecoration
+                    const SizedBox(height: 10),
+                    const Text
                     (
-                      hintText: "Password",
-                      focusedBorder: OutlineInputBorder
+                      "Registrarse",
+                      style: TextStyle
                       (
-                        borderSide: BorderSide
-                        (
-                          color: Colors.black
-                        )
-                      )
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text
-                (
-                  "Al finalizar el registro se\nesta aceptado la",
-                  textAlign: TextAlign.center,
-                ),
-                GestureDetector
-                (
-                  onTap: ()async
-                  {
-                    Uri url=Uri.parse("https://shrub-almond-f38.notion.site/Pol-tica-de-privacidad-9867af0633af450b8cb8d4104d483fe5?pvs=4");
-                    if(await canLaunchUrl(url))
-                    {
-                      await launchUrl(url);
-                    }
-                    else
-                    {
-                      throw 'No se pudo abrir la URL $url';
-                    }
-                  },
-                  child: const Text
-                  (
-                    "Politica de Privacidad",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton
-                (
-                  onPressed: (){},
-                  style:ElevatedButton.styleFrom
-                  (
-                    backgroundColor: Colors.black,
-                    foregroundColor: Colors.white
-                  ),
-                  child: const Text("Registrarse")
+                    const SizedBox(height: 10),
+                    SizedBox
+                    (
+                      width: 250,
+                      child: FormBuilderTextField
+                      (
+                        name: "user",
+                        key:userKey,
+                        controller: userController,
+                        decoration: const InputDecoration
+                        (
+                          hintText: "Nombre de usuario",
+                          focusedBorder: OutlineInputBorder
+                          (
+                            borderSide: BorderSide
+                            (
+                              color: Colors.black
+                            )
+                          )
+                        ),
+                        validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(errorText: "Este campo debe tener contenido."),
+                          FormBuilderValidators.maxLength(20, errorText: "No debe superar 20 caracteres.")
+                        ]),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox
+                    (
+                      width: 250,
+                      child: FormBuilderTextField
+                      (
+                        name: "email",
+                        key: emailKey,
+                        controller: emailController,
+                        decoration: const InputDecoration
+                        (
+                          hintText: "Email",
+                          focusedBorder: OutlineInputBorder
+                          (
+                            borderSide: BorderSide
+                            (
+                              color: Colors.black
+                            )
+                          )
+                        ),
+                        validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(errorText: "Este campo debe tener contenido."),
+                          FormBuilderValidators.email(errorText: "Ingresa un correo con formato valido")
+                        ]),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox
+                    (
+                      width: 250,
+                      child: FormBuilderTextField
+                      (
+                        name: "pass",
+                        key: passKey,
+                        controller: passwordController,
+                        obscureText: true,
+                        decoration: const InputDecoration
+                        (
+                          hintText: "Password",
+                          focusedBorder: OutlineInputBorder
+                          (
+                            borderSide: BorderSide
+                            (
+                              color: Colors.black
+                            )
+                          )
+                        ),
+                        validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(errorText: "Este campo debe tener contenido."),
+                          FormBuilderValidators.minLength(8, errorText: "Debe tener al menos 8 caracteres.")
+                        ]),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text
+                    (
+                      "Al finalizar el registro se\nesta aceptado la",
+                      textAlign: TextAlign.center,
+                    ),
+                    GestureDetector
+                    (
+                      onTap: ()async
+                      {
+                        Uri url=Uri.parse("https://shrub-almond-f38.notion.site/Pol-tica-de-privacidad-9867af0633af450b8cb8d4104d483fe5?pvs=4");
+                        if(await canLaunchUrl(url))
+                        {
+                          await launchUrl(url);
+                        }
+                        else
+                        {
+                          throw 'No se pudo abrir la URL $url';
+                        }
+                      },
+                      child: const Text
+                      (
+                        "Politica de Privacidad",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    proceso?const CircularProgressIndicator(color: Colors.black,):const SizedBox(height: 10),
+                    const SizedBox(height: 5),
+                    ElevatedButton
+                    (
+                      onPressed: () async
+                      {
+                        setState(() {
+                          proceso=true;
+                        });
+                        if(!userKey.currentState!.validate() || !emailKey.currentState!.validate() || !passKey.currentState!.validate())
+                        {
+                          setState(() {
+                            proceso=false;
+                          });
+                          return;
+                        }
+                        String email=emailController.text;
+                        String username=userController.text;
+                        String password=passwordController.text;
+                        if(await service.registrarUser(username, email, password))
+                        {
+                          setState(() {
+                            Navigator.pushNamed(context, '/login');
+                          });
+                        }
+                        else
+                        {
+                          setState(() {
+                            proceso=false;
+                          });
+                          Fluttertoast.showToast
+                          (
+                            msg: "El correo ya esta registrado. Inicia sesion.",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM
+                          );
+                        }
+                      },
+                      style:ElevatedButton.styleFrom
+                      (
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white
+                      ),
+                      child: const Text("Registrarse")
+                    )
+                  ],
                 )
               ],
             )

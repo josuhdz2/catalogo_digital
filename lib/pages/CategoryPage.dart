@@ -9,7 +9,7 @@ class CategoryPage extends StatefulWidget
 }
 class _CategoryPageState extends State<CategoryPage>
 {
-  List<String> lista=["hola"];
+  List<String> lista=["Tenis"];
   final TextEditingController busquedaController=TextEditingController();
   @override
   Widget build(BuildContext context)

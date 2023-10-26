@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:pastylla_client/services/Service.dart';
 class LoginPage extends StatefulWidget
 {
@@ -16,6 +18,9 @@ class _LoginPageState extends State<LoginPage>
   }
   final TextEditingController emailController=TextEditingController();
   final TextEditingController passwordController=TextEditingController();
+  final emailKey=GlobalKey<FormBuilderFieldState>();
+  final passKey=GlobalKey<FormBuilderFieldState>();
+  bool proceso=false;
   @override
   Widget build(BuildContext context)
   {
@@ -31,7 +36,7 @@ class _LoginPageState extends State<LoginPage>
           [
             const SizedBox
             (
-              height: 500,
+              height: 550,
               width: 300,
               child: DecoratedBox
               (
@@ -47,7 +52,7 @@ class _LoginPageState extends State<LoginPage>
               mainAxisAlignment: MainAxisAlignment.center,
               children:
               [
-                const FlutterLogo(size: 60),
+                Image.asset("assets/logo.jpg", height: 120),
                 const Text
                 (
                   "Pastylla Store\nApp",
@@ -73,8 +78,10 @@ class _LoginPageState extends State<LoginPage>
                 SizedBox
                 (
                   width: 250,
-                  child: TextFormField
+                  child: FormBuilderTextField
                   (
+                    name: "email",
+                    key: emailKey,
                     controller: emailController,
                     decoration: const InputDecoration
                     (
@@ -87,14 +94,21 @@ class _LoginPageState extends State<LoginPage>
                         )
                       )
                     ),
+                    validator: FormBuilderValidators.compose(
+                    [
+                      FormBuilderValidators.required(errorText: "Este campo debe tener contenido."),
+                      FormBuilderValidators.email(errorText: "Ingresa un correo con formato valido")
+                    ]),
                   ),
                 ),
                 const SizedBox(height: 10),
                 SizedBox
                 (
                   width: 250,
-                  child: TextFormField
+                  child: FormBuilderTextField
                   (
+                    name: "password",
+                    key: passKey,
                     controller: passwordController,
                     obscureText: true,
                     decoration: const InputDecoration
@@ -108,13 +122,30 @@ class _LoginPageState extends State<LoginPage>
                         )
                       )
                     ),
+                    validator: FormBuilderValidators.compose(
+                    [
+                      FormBuilderValidators.required(errorText: "Este campo debe tener contenido."),
+                      FormBuilderValidators.minLength(8, errorText: "Debe tener al menos 8 caracteres.")
+                    ]),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 5),
+                proceso?const CircularProgressIndicator(color: Colors.black,):const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 ElevatedButton
                 (
                   onPressed: () async
                   {
+                    setState(() {
+                      proceso=true;
+                    });
+                    if(!emailKey.currentState!.validate() || !passKey.currentState!.validate())
+                    {
+                      setState(() {
+                        proceso=false;
+                      });
+                      return;
+                    }
                     String email=emailController.text;
                     String password=passwordController.text;
                     if(await service.login(email, password))
@@ -123,12 +154,17 @@ class _LoginPageState extends State<LoginPage>
                     }
                     else
                     {
+                      setState(() {
+                        proceso=false;
+                      });
                       Fluttertoast.showToast
                       (
                         msg: "La informacion es incorrecta",
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.BOTTOM
                       );
+                      emailController.text="";
+                      passwordController.text="";
                     }
                   },
                   style:ElevatedButton.styleFrom
