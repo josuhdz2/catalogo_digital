@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pastylla_client/services/Service.dart';
 import 'package:pastylla_client/widgets/Banner.dart';
@@ -35,6 +34,7 @@ class _InitialPageState extends State<InitialPage>
     return GridView.builder
     (
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      padding: const EdgeInsets.all(10),
       itemCount: lista.length,
       itemBuilder: (context, index)
       {

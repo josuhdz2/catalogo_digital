@@ -9,6 +9,9 @@ class BannerBuilder extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
+    var medida=MediaQuery.of(context).size.width;
+    medida=medida/2;
+    medida=medida*0.8;
     return GestureDetector
     (
       onTap:()
@@ -25,17 +28,16 @@ class BannerBuilder extends StatelessWidget
         [
           Image.network
           (
-            'http://192.168.1.94:3000/images/$urlImage',
-            width: 150,
-            height: 150,
-            fit: BoxFit.cover,
+            'https://firebasestorage.googleapis.com/v0/b/pastyllastorestorage.appspot.com/o/$urlImage?alt=media',
+            width: medida,
+            height: medida,
           ),
           Padding
           (
             padding: const EdgeInsets.all(2.0),
             child: Text
             (
-              nombre,
+              "${nombre.substring(0,16)}...",
               style: const TextStyle(fontSize: 16),
             ),
           )
