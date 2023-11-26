@@ -22,6 +22,7 @@ class TabsHomePage extends StatelessWidget {
           [
             IconButton
             (
+              key: const ValueKey("favPage"),
               onPressed: ()
               {
                 Navigator.push
@@ -35,6 +36,7 @@ class TabsHomePage extends StatelessWidget {
             ),
             IconButton
             (
+              key: const ValueKey("carrito"),
               onPressed: ()
               {
                 Navigator.push
@@ -51,15 +53,16 @@ class TabsHomePage extends StatelessWidget {
           (
             tabs:
             [
-              Tab(icon: Icon(Icons.home)),
-              Tab(icon:Icon(Icons.menu)),
-              Tab(icon: Icon(Icons.info))
+              Tab(icon: Icon(Icons.home), key: ValueKey('home')),
+              Tab(icon:Icon(Icons.menu), key: ValueKey('menu'),),
+              Tab(icon: Icon(Icons.info), key: ValueKey('info'),)
             ]
           ),
           backgroundColor: Colors.black,
           centerTitle: true,
           title: const Text
           (
+            key:ValueKey("titulo"),
             "Pastylla Store",
             style: TextStyle
             (

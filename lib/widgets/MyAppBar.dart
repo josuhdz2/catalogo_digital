@@ -10,6 +10,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget
   {
     return AppBar
     (
+      leading: IconButton
+      (
+        key: const ValueKey("regresar"),
+        icon: const Icon(Icons.arrow_back),
+        onPressed: ()
+        {
+          Navigator.of(context).pop();
+        }
+      ),
       backgroundColor: Colors.black,
       centerTitle: true,
       title: Text

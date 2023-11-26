@@ -69,7 +69,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                     const SizedBox(height: 10),
                     const Text
                     (
-                      "Registrarse",
+                      "Registrate",
                       style: TextStyle
                       (
                         fontSize: 30,
@@ -79,6 +79,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                     const SizedBox(height: 10),
                     SizedBox
                     (
+                      key: const ValueKey("user"),
                       width: 250,
                       child: FormBuilderTextField
                       (
@@ -106,6 +107,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                     const SizedBox(height: 10),
                     SizedBox
                     (
+                      key: const ValueKey("email"),
                       width: 250,
                       child: FormBuilderTextField
                       (
@@ -133,6 +135,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                     const SizedBox(height: 10),
                     SizedBox
                     (
+                      key: const ValueKey("pass"),
                       width: 250,
                       child: FormBuilderTextField
                       (
@@ -189,6 +192,7 @@ class _RegistrationPageState extends State<RegistrationPage>
                     const SizedBox(height: 5),
                     ElevatedButton
                     (
+                      key: const ValueKey("registro"),
                       onPressed: () async
                       {
                         setState(() {

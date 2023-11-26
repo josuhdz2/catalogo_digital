@@ -59,6 +59,15 @@ class _HomePageState extends State<HomePage>
         userController.text=usuario['username'];
         emailController.text=usuario['email'];
       });
+    })
+    .catchError((onError)
+    {
+      setState(()
+      {
+        //se puede agregar la eliminacion como cierre de sesion
+        Fluttertoast.showToast(msg: "La sesion ha vencido");
+        Navigator.pushReplacementNamed(context, '/login');
+      });
     });
   }
   @override
@@ -72,6 +81,7 @@ class _HomePageState extends State<HomePage>
         [
           const Text
           (
+            key:ValueKey("mensaje"),
             "Informacion de usuario",
             style: TextStyle
             (
@@ -237,6 +247,7 @@ class _HomePageState extends State<HomePage>
           const Text("Hernandez Sanchez Jeronimo de Jesus"),
           ElevatedButton
           (
+            key: const ValueKey("cerrarSesion"),
             onPressed: () async
             {
               await service.logout();
