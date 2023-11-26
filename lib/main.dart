@@ -32,7 +32,6 @@ class _VerifySesionState extends State<VerifySesion>
   @override
   void initState() {
     super.initState();
-    print("verificando sesion");
     llamarVerificacion();
   }
   Future<void> llamarVerificacion() async{

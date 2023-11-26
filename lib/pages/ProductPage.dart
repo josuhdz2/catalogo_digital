@@ -13,7 +13,7 @@ class ProductPage extends StatefulWidget
 class _ProductPageState extends State<ProductPage>
 {
   final TextEditingController comentarioController=TextEditingController();
-  Map<String, dynamic> producto={};
+  Map<String, dynamic> producto={'nombre':'', 'imagenes':[], '-id':"", 'precio':0, 'estado':false, 'marca':'', 'tallas':'', 'descripcion':''};
   List<Map<String, dynamic>> comentarios=[];
   Service service=Service();
   bool favorito=false;
@@ -93,6 +93,7 @@ class _ProductPageState extends State<ProductPage>
                 ),
                 IconButton
                 (
+                  key: const ValueKey("agregarFav"),
                   onPressed: ()
                   {
                     service.agregarFav(producto['_id'])
@@ -144,7 +145,7 @@ class _ProductPageState extends State<ProductPage>
                   (
                     children: <Widget>
                     [
-                      const Text("Dispible"),
+                      const Text("Disponible"),
                       producto['estado']==true?const Icon(Icons.check_circle_outline_outlined,color: Colors.green):const Icon(Icons.cancel_outlined,color: Colors.red)
                     ],
                   ),
@@ -227,6 +228,7 @@ class _ProductPageState extends State<ProductPage>
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField
                 (
+                  key: const ValueKey("comentario"),
                   controller: comentarioController,
                   decoration: const InputDecoration
                   (
@@ -265,6 +267,7 @@ class _ProductPageState extends State<ProductPage>
       ),
       floatingActionButton: RawMaterialButton
       (
+        key: const ValueKey("agregarCar"),
         onPressed: ()
         {
           service.agregarCarrito(producto['_id'])

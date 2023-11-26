@@ -37,6 +37,7 @@ class BannerBuilder extends StatelessWidget
             padding: const EdgeInsets.all(2.0),
             child: Text
             (
+              key:ValueKey(id),
               "${nombre.substring(0,16)}...",
               style: const TextStyle(fontSize: 16),
             ),

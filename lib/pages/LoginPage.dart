@@ -77,6 +77,7 @@ class _LoginPageState extends State<LoginPage>
                 const SizedBox(height: 10),
                 SizedBox
                 (
+                  key: const ValueKey("email"),
                   width: 250,
                   child: FormBuilderTextField
                   (
@@ -85,6 +86,7 @@ class _LoginPageState extends State<LoginPage>
                     controller: emailController,
                     decoration: const InputDecoration
                     (
+
                       hintText: "Email",
                       focusedBorder: OutlineInputBorder
                       (
@@ -104,6 +106,7 @@ class _LoginPageState extends State<LoginPage>
                 const SizedBox(height: 10),
                 SizedBox
                 (
+                  key: const ValueKey("pass"),
                   width: 250,
                   child: FormBuilderTextField
                   (
@@ -134,6 +137,7 @@ class _LoginPageState extends State<LoginPage>
                 const SizedBox(height: 5),
                 ElevatedButton
                 (
+                  key: const Key("iniciarSesion"),
                   onPressed: () async
                   {
                     setState(() {
@@ -160,7 +164,7 @@ class _LoginPageState extends State<LoginPage>
                       Fluttertoast.showToast
                       (
                         msg: "La informacion es incorrecta",
-                        toastLength: Toast.LENGTH_SHORT,
+                        toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.BOTTOM
                       );
                       emailController.text="";
@@ -178,6 +182,7 @@ class _LoginPageState extends State<LoginPage>
                 const Text("No tienes una cuenta?"),
                 GestureDetector
                 (
+                  key: const ValueKey("crearCuentaLink"),
                   onTap: ()
                   {
                     Navigator.pushNamed(context, '/signup');

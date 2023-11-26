@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:pastylla_client/services/Service.dart';
 import 'package:pastylla_client/widgets/Banner.dart';
@@ -12,6 +14,7 @@ class _FavoritesPageState extends State<FavoritesPage>
 {
   List<Map<String, dynamic>> lista=[];
   Service service=Service();
+  bool listaEstado=true;
   @override
   void initState()
   {
@@ -22,10 +25,20 @@ class _FavoritesPageState extends State<FavoritesPage>
   {
     service.listaFavoritos().then((data)=>
     {
-      setState(()
+      if(data.isNotEmpty)
       {
-        lista=data;
-      })
+        setState(()
+        {
+          lista=data;
+        })
+      }
+      else
+      {
+        setState(()
+        {
+          listaEstado=false;
+        })
+      }
     });
   }
   @override
@@ -34,7 +47,7 @@ class _FavoritesPageState extends State<FavoritesPage>
     return Scaffold
     (
       appBar: const MyAppBar(nombre:"Favoritos"),
-      body: GridView.builder
+      body: listaEstado?GridView.builder
       (
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemCount: lista.length,
@@ -47,6 +60,15 @@ class _FavoritesPageState extends State<FavoritesPage>
             urlImage: lista[index]['imagenes'][0]
           );
         }
+      ):const Text
+      (
+        key:ValueKey("vacio"),
+        "No hay productos agregados",
+        style: TextStyle
+        (
+          fontSize: 20,
+          fontWeight: FontWeight.bold
+        ),
       ),
     );
   }

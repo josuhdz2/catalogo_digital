@@ -50,6 +50,7 @@ class _CategoryPageState extends State<CategoryPage>
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Text
             (
+              key:ValueKey("mensaje"),
               "Categorias",
               style: TextStyle
               (
